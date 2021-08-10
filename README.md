@@ -10,6 +10,8 @@ If you would like to run this program with a GUI, go to https://github.com/java-
 ## Quick Start
 
 * [Download](https://github.com/java-deobfuscator/deobfuscator/releases) the deobfuscator.
+
+### 0x01 detect.yml
 * If you know what obfuscators were used, skip the next two steps
 * Create `detect.yml` with the following contents. Replace `input.jar` with the name of the input
 ```yaml
@@ -17,14 +19,20 @@ input: input.jar
 detect: true
 ```
 * Run `java -jar deobfuscator.jar --config detect.yml` to determine the obfuscators used
+
+### 0x02 config.yml
+
 * Create `config.yml` with the following contents. Replace `input.jar` with the name of the input
 ```yaml
 input: input.jar
 output: output.jar
 transformers:
   - [fully-qualified-name-of-transformer]
-  - [fully-qualified-name-of-transformer]
-  - [fully-qualified-name-of-transformer]
+
+  - com.javadeobfuscator.deobfuscator.transformers.zelix.string.EnhancedStringEncryptionTransformer
+  - com.javadeobfuscator.deobfuscator.transformers.zelix.FlowObfuscationTransformer
+  - com.javadeobfuscator.deobfuscator.transformers.zelix.ReflectionObfuscationTransformer
+  
   - ... etc
 ``` 
 * Run `java -jar deobfuscator.jar`
